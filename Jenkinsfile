@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-
-    }
     parameters {
         string(name: 'GREETING', defaultValue: 'Hello', description: 'String test')
         booleanParam(name: 'REPORTELASTIC', defaultValue: true, description: 'Report test results to Elastic')
