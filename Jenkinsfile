@@ -4,8 +4,8 @@ pipeline {
 
     }
     parameters {
-        string(name: 'Hello', defaultValue: 'Hello,' description: 'String test')
-        booleanParam(name: 'reportToElastic', defaultValue: true, description: 'Report test results to Elastic')
+        string(name: 'GREETING', defaultValue: 'Hello' description: 'String test')
+        booleanParam(name: 'REPORTELASTIC', defaultValue: true, description: 'Report test results to Elastic')
     }
     environment {
         SERVER_CREDENTIALS = credentials('server-credentials')
@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                echo "${params.Hello} World"
+                echo "${params.GREETING} World"
                 echo "Using commit ${GIT_COMMIT}"
                 echo "Committer ${GIT_COMMITTER_EMAIL}"
             }
