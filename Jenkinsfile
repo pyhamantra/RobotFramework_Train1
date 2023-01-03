@@ -4,7 +4,7 @@ pipeline {
 
     }
     parameters {
-        string(name: 'GREETING', defaultValue: 'Hello' description: 'String test')
+        string(name: 'GREETING', defaultValue: 'Hello', description: 'String test')
         booleanParam(name: 'REPORTELASTIC', defaultValue: true, description: 'Report test results to Elastic')
     }
     environment {
