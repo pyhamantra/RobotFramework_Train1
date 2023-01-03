@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    tools {
+
+    }
+    parameters {
+        string(name: 'Hello', defaultValue: 'Hello,' description: 'String test')
+        booleanParam(name: 'reportToElastic', defaultValue: true, description: 'Report test results to Elastic')
+    }
     environment {
         SERVER_CREDENTIALS = credentials('server-credentials')
     }
@@ -7,9 +14,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
+                echo "${params.Hello} World"
                 echo "Using commit ${GIT_COMMIT}"
                 echo "Committer ${GIT_COMMITTER_EMAIL}"
-
             }
         }
         stage('Test') {
@@ -20,6 +27,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
+                // Alternatively use withCredentials and not env wrapper
+                withCredentials([
+                    userNamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)
+                ]) {
+                    sh('echo Script is run here...')
+                }
             }
         }
     }
