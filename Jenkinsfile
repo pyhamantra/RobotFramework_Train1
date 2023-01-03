@@ -12,8 +12,6 @@ pipeline {
             steps {
                 echo 'Building the application...'
                 echo "${params.GREETING} World"
-                echo "Using commit ${GIT_COMMIT}"
-                echo "Committer ${GIT_COMMITTER_EMAIL}"
             }
         }
         stage('Test') {
