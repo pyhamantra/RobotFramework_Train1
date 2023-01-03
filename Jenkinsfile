@@ -22,12 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Alternatively use withCredentials and not env wrapper
-                withCredentials([
-                    userNamePassword(credentials: 'server-credentials', usernameVariable: USER, passwordVariable: PWD)
-                ]) {
-                    sh('echo Script is run here...')
-                }
+                echo("Deploying with ${SERVER_CREDENTIALS}")
             }
         }
     }
