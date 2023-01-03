@@ -2,7 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'GREETING', defaultValue: 'Hello', description: 'String test')
-        booleanParam(name: 'REPORTELASTIC', defaultValue: true, description: 'Report test results to Elastic')
+        booleanParam(name: 'reportToElastic', defaultValue: true, description: 'Report test results to Elastic')
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'Check whether tests will be run')
     }
     environment {
         SERVER_CREDENTIALS = credentials('server-credentials')
@@ -15,6 +16,11 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
             steps {
                 echo 'Testing the application...'
             }
